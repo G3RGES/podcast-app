@@ -1,7 +1,7 @@
 import React, { useContext } from "react";
 import { UserContext } from "../contexts/UserContext";
 
-const Header = ({ loggedIn, setLoggedIn }) => {
+const Header = ({ loggedIn, setLoggedIn, signInButton }) => {
   const [user, setUser] = useContext(UserContext);
 
   const handleLogOut = () => {
@@ -13,9 +13,9 @@ const Header = ({ loggedIn, setLoggedIn }) => {
     <>
       {loggedIn ? (
         <>
-          <div className="flex flex-row items-center justify-center">
+          <div className="flex flex-row items-center justify-start gap-2 py-4 pl-8">
             <img
-              className="w-14 rounded-full mr-2"
+              className="w-14 rounded-full "
               src={user.picture}
               alt="user_img"
             />
@@ -31,8 +31,8 @@ const Header = ({ loggedIn, setLoggedIn }) => {
           </h1>
         </>
       ) : (
-        <div className="mt-8">
-          <div id="SignIn"></div>
+        <div className="py-4 flex flex-row items-center gap-2 justify-start pl-8">
+          <div ref={signInButton}></div>
         </div>
       )}
       <h1 className="text-5xl text-center font-semibold mt-3 py-2">
