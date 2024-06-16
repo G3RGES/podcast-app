@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 
 import { jwtDecode } from "jwt-decode";
 import { UserContext } from "./contexts/UserContext";
+import Header from "./components/Header";
 
 function App() {
   const [user, setUser] = useState({});
@@ -13,11 +14,6 @@ function App() {
     // console.log(user);//*TESTING
     setUser(user);
     setLoggedIn(true);
-  };
-
-  const handleLogOut = () => {
-    setLoggedIn(false);
-    setUser({});
   };
 
   useEffect(() => {
@@ -35,27 +31,7 @@ function App() {
 
   return (
     <UserContext.Provider value={[user, setUser]}>
-      <div className="flex flex-col items-center ">
-        <h1 className="text-3xl text-center font-semibold mt-3 py-2">
-          Podcasts
-        </h1>
-
-        {loggedIn ? (
-          <>
-            <button
-              className="border py-1 px-3 rounded-lg bg-blue-500 text-white font-semibold my-2"
-              onClick={handleLogOut}
-            >
-              Log out
-            </button>
-            <h3>HI there, {user.given_name}</h3>
-          </>
-        ) : (
-          <>
-            <div id="SignIn"></div>
-          </>
-        )}
-      </div>
+      <Header loggedIn={loggedIn} setLoggedIn={setLoggedIn} user={user} />
     </UserContext.Provider>
   );
 }
