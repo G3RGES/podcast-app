@@ -13,8 +13,12 @@ const Header = ({ loggedIn, setLoggedIn }) => {
     <>
       {loggedIn ? (
         <>
-          <div className="flex flex-row items-center">
-            <img className="" src={user.picture} alt="user_img" />
+          <div className="flex flex-row items-center justify-center">
+            <img
+              className="w-14 rounded-full mr-2"
+              src={user.picture}
+              alt="user_img"
+            />
             <button
               className="border py-1 px-3 rounded-lg bg-blue-500 text-white font-semibold my-4"
               onClick={handleLogOut}
@@ -22,7 +26,9 @@ const Header = ({ loggedIn, setLoggedIn }) => {
               Log out
             </button>
           </div>
-          <h1 className="text-3xl font-medium ">HI there, {user.given_name}</h1>
+          <h1 className="text-3xl font-medium text-center">
+            Hi there, {user.given_name}
+          </h1>
         </>
       ) : (
         <div className="mt-8">
