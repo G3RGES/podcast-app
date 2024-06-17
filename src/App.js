@@ -46,7 +46,13 @@ function App() {
         itemList.forEach((el) => {
           items.push({
             title: el.querySelector("title").innerHTML,
-            pubDate: new Date(el.querySelector("pubDate").textContent),
+            pubDate: new Date(
+              el.querySelector("pubDate").textContent
+            ).toLocaleDateString("en-GB", {
+              day: "numeric",
+              month: "long",
+              year: "numeric",
+            }),
             mp3: el.querySelector("enclosure").getAttribute("url"),
             link: el.querySelector("link").innerHTML,
           });
@@ -65,17 +71,20 @@ function App() {
         user={user}
         signInButton={signInButton}
       />
-      {data.map((ep, idx) => (
-        <>
-          <Episode
-            key={idx}
-            title={ep.title}
-            pubDate={ep.pubDate}
-            mp3={ep.mp3}
-            link={ep.link}
-          />
-        </>
-      ))}
+      <div className="pl-4 py-4">
+        <h2 className="text-2xl font-medium">Accidental Tech Podcast</h2>
+        {data.map((ep, idx) => (
+          <>
+            <Episode
+              key={idx}
+              title={ep.title}
+              pubDate={ep.pubDate}
+              mp3={ep.mp3}
+              link={ep.link}
+            />
+          </>
+        ))}
+      </div>
     </UserContext.Provider>
   );
 }
