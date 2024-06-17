@@ -3,10 +3,13 @@ import { useEffect, useState, useRef } from "react";
 import { jwtDecode } from "jwt-decode";
 import { UserContext } from "./contexts/UserContext";
 import Header from "./components/Header";
+import Episode from "./components/Episode";
 
 function App() {
   const [user, setUser] = useState({});
   const [loggedIn, setLoggedIn] = useState(false);
+  const [data, setData] = useState([]);
+
   const signInButton = useRef();
 
   const handleCallBack = (res) => {
@@ -30,6 +33,30 @@ function App() {
     });
   }, [loggedIn]);
 
+  const rssFeed = "https://cdn.atp.fm/rss/public?yjnbwvb2";
+
+  useEffect(() => {
+    fetch(rssFeed)
+      .then((res) => res.text())
+      .then((str) => {
+        const parser = new window.DOMParser();
+        const data = parser.parseFromString(str, "text/xml");
+        const itemList = data.querySelectorAll("item");
+        const items = [];
+        itemList.forEach((el) => {
+          items.push({
+            title: el.querySelector("title").innerHTML,
+            pubDate: new Date(el.querySelector("pubDate").textContent),
+            mp3: el.querySelector("enclosure").getAttribute("url"),
+            link: el.querySelector("link").innerHTML,
+          });
+        });
+        setData(items);
+      });
+  }, [rssFeed]);
+
+  // console.log(data); //*TESTING
+
   return (
     <UserContext.Provider value={[user, setUser]}>
       <Header
@@ -38,6 +65,17 @@ function App() {
         user={user}
         signInButton={signInButton}
       />
+      {data.map((ep, idx) => (
+        <>
+          <Episode
+            key={idx}
+            title={ep.title}
+            pubDate={ep.pubDate}
+            mp3={ep.mp3}
+            link={ep.link}
+          />
+        </>
+      ))}
     </UserContext.Provider>
   );
 }
