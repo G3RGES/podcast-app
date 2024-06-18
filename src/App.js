@@ -86,9 +86,9 @@ function App() {
         </div>
       ) : (
         <>
-          <p className="font-semibold text-center text-3xl text-blue-500">
+          <h3 className="font-semibold text-center text-3xl text-blue-500 px-5 pt-6 mx-auto">
             Please Login to Listen
-          </p>
+          </h3>
         </>
       )}
     </UserContext.Provider>
