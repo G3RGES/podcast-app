@@ -1,6 +1,9 @@
-import React from "react";
+import React, { useContext } from "react";
+import { UserContext } from "../contexts/UserContext";
 
 const Episode = ({ title, pubDate, mp3, link }) => {
+  const [user] = useContext(UserContext);
+
   return (
     <div
       className="flex flex-row items-center justify-around
@@ -23,11 +26,13 @@ const Episode = ({ title, pubDate, mp3, link }) => {
       </div>
       <div className="flex flex-col gap-3 my-1">
         <label htmlFor="notes" className="font-semibold text-gray-800 ">
-          Make Notes
+          Make Note
         </label>
         <textarea
           id="notes"
-          placeholder="what did you learn from the episode?"
+          placeholder={
+            "what did you learn from the episode?" + `${user.given_name}`
+          }
           className="border rounded-md p-2 focus:outline-none"
           rows={5}
           cols={50}
