@@ -71,20 +71,28 @@ function App() {
         user={user}
         signInButton={signInButton}
       />
-      <div className="pl-4 py-4">
-        <h2 className="text-2xl font-medium">Accidental Tech Podcast</h2>
-        {data.map((ep, idx) => (
-          <>
-            <Episode
-              key={idx}
-              title={ep.title}
-              pubDate={ep.pubDate}
-              mp3={ep.mp3}
-              link={ep.link}
-            />
-          </>
-        ))}
-      </div>
+      {loggedIn ? (
+        <div className="pl-4 py-4">
+          <h2 className="text-2xl font-medium">Accidental Tech Podcast</h2>
+          {data.map((ep, idx) => (
+            <>
+              <Episode
+                key={idx}
+                title={ep.title}
+                pubDate={ep.pubDate}
+                mp3={ep.mp3}
+                link={ep.link}
+              />
+            </>
+          ))}
+        </div>
+      ) : (
+        <>
+          <p className="font-semibold text-center text-3xl text-blue-500">
+            Please Login to Listen
+          </p>
+        </>
+      )}
     </UserContext.Provider>
   );
 }
