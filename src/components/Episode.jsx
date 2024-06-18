@@ -31,7 +31,10 @@ const Episode = ({ title, pubDate, mp3, link }) => {
         <textarea
           id="notes"
           placeholder={
-            "what did you learn from the episode?" + `${user.given_name}`
+            "what did you learn from the episode " +
+            `${user.given_name}` +
+            " " +
+            "?"
           }
           className="border rounded-md p-2 focus:outline-none"
           rows={5}
