@@ -72,18 +72,16 @@ function App() {
         signInButton={signInButton}
       />
       {loggedIn ? (
-        <div className="pl-4 py-4">
+        <div className="pl-4 py-4 pr-4">
           <h2 className="text-2xl font-medium">Accidental Tech Podcast</h2>
           {data.map((ep, idx) => (
-            <>
-              <Episode
-                key={idx}
-                title={ep.title}
-                pubDate={ep.pubDate}
-                mp3={ep.mp3}
-                link={ep.link}
-              />
-            </>
+            <Episode
+              key={idx}
+              title={ep.title}
+              pubDate={ep.pubDate}
+              mp3={ep.mp3}
+              link={ep.link}
+            />
           ))}
         </div>
       ) : (
